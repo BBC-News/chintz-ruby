@@ -8,11 +8,14 @@ module Chintz
       @deps = {}
     end
 
-    def prepare element_name
-      element = load_yaml element_name
-      raise "Manifest must provide a Name" unless element["name"]
-      return unless element['dependencies']
-      resolve_dependencies element['dependencies']
+    def prepare element_names
+      element_names = [element_names] unless element_names.kind_of?(Array)
+      element_names.each do |element_name|
+        element = load_yaml element_name
+        raise "Manifest must provide a Name" unless element["name"]
+        return unless element['dependencies']
+        resolve_dependencies element['dependencies']
+      end
     end
 
     def load_yaml name
@@ -21,7 +24,6 @@ module Chintz
     end
 
     def resolve_dependencies deps
-
       deps.each do |type, value|
         unless type == 'elements'
           add_dependency type, value
@@ -43,8 +45,16 @@ module Chintz
       @deps[type]
     end
 
-    def render element, data
+    def render element, data = nil
+      unless data
+        data = fixture()
+      end
       DynamicMustache.render_file(element, data);
     end
+
+    def fixture
+      {"stories" => [0,1]}
+    end
+
   end
 end

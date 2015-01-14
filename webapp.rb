@@ -1,19 +1,18 @@
 require 'sinatra'
 require './lib/parser.rb'
+require './lib/fixture.rb'
 
 class WebApp < Sinatra::Base
+
   set :public_folder, Proc.new { File.join(root, "chintz") }
+
   get '/' do
     parser = Chintz::Parser.new
-    parser.prepare 'elementA'
-    @css =  parser.dependency 'css'
-    @content = parser.render('elementA', {
-      "title" => "This is the root template!",
-      "items" => [0,1],
-      "subtitle" => "A child partial",
-      "name" => "Jack",
-      "occupation" => "Nurse"
-    })
+    parser.prepare ['mediaObject', 'elementA']
+    @css = parser.dependency 'css'
+    @content = ''
+    @content << parser.render('mediaObject', Chintz::Fixture.load_plain_json('stories'))
+    @content << parser.render('elementA', Chintz::Fixture.load_plain_json('people'))
     erb :index
   end
 
