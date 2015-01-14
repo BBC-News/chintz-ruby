@@ -1,8 +1,8 @@
-require 'json'
+require 'yaml'
 module Chintz
   class Fixture
-    def self.load_plain_json name
-      JSON.parse(IO.read("chintz/fixtures/#{name}.json"))
+    def self.load_plain_yaml name
+      YAML.load_file("chintz/fixtures/#{name}.yaml")
     end
   end
 end

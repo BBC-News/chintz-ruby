@@ -11,8 +11,8 @@ class WebApp < Sinatra::Base
     parser.prepare ['mediaObject', 'elementA']
     @css = parser.dependency 'css'
     @content = ''
-    @content << parser.render('mediaObject', Chintz::Fixture.load_plain_json('stories'))
-    @content << parser.render('elementA', Chintz::Fixture.load_plain_json('people'))
+    @content << parser.render('mediaObject', Chintz::Fixture.load_plain_yaml('stories'))
+    @content << parser.render('elementA', Chintz::Fixture.load_plain_yaml('people'))
     erb :index
   end
 
