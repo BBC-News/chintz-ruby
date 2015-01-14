@@ -2,6 +2,6 @@ require 'bundler'
 
 Bundler.require
 
-require './chintz.rb'
+require './webapp.rb'
 
-run Chintz
+run WebApp

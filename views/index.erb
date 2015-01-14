@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <% for @style_sheet in @css %>
+            <link type="text/css" rel="stylesheet" href="/<%= @style_sheet %>" />
+        <% end %>
+    </head>
+    <body>
+        <%= @content %>
+    </body>
+</html>

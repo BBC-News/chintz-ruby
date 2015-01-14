@@ -1,0 +1,3 @@
+[submodule "chintz"]
+	path = chintz
+	url = git@github.com:pgchamberlin/chintz.git
