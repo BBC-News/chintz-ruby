@@ -9,13 +9,10 @@ module Chintz
     end
 
     def prepare element_name
-
       element = load_yaml element_name
       raise "Manifest must provide a Name" unless element["name"]
       return unless element['dependencies']
-
       resolve_dependencies element['dependencies']
-      @deps
     end
 
     def load_yaml name
