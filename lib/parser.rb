@@ -1,4 +1,4 @@
-require './lib/dynamic_mustache.rb'
+require 'dynamic_mustache.rb'
 require 'yaml'
 
 module Chintz

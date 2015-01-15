@@ -1,6 +1,6 @@
 require 'sinatra'
-require './lib/parser.rb'
-require './lib/fixture.rb'
+require 'parser.rb'
+require 'fixture.rb'
 
 class WebApp < Sinatra::Base
 
