@@ -1,5 +1,5 @@
-require 'dynamic_mustache.rb'
 require 'yaml'
+require 'dynamic_mustache.rb'
 
 module Chintz
   class Parser
@@ -11,11 +11,13 @@ module Chintz
     def prepare element_names
       element_names = [element_names] unless element_names.kind_of?(Array)
       element_names.each do |element_name|
+        raise ArgumentError, "String or Array of strings" unless element_name.kind_of? String
         element = load_yaml element_name
-        raise "Manifest must provide a Name" unless element["name"]
+        raise NameError, "Manifest must provide a Name" unless element["name"]
         return unless element['dependencies']
         resolve_dependencies element['dependencies']
       end
+      @deps
     end
 
     def load_yaml name
