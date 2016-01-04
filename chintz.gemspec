@@ -19,4 +19,6 @@ Gem::Specification.new do |spec|
   spec.test_files   = `git ls-files -- spec/*`.split("\n")
   spec.executables  = []
   spec.require_path = 'lib'
+
+  spec.add_runtime_dependency 'mustache', ['>= 1.0', '< 2.0']
 end
