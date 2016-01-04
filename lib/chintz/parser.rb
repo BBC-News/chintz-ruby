@@ -26,6 +26,9 @@ module Chintz
 
     def load_yaml name
       yaml_path = Dir.glob("#{@base_path}/**/#{name}.yaml").first
+
+      raise NameError, "Manifest file for #{name} not found in #{@base_path}" if yaml_path.nil?
+
       YAML.load_file yaml_path
     end
 
