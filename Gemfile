@@ -1,13 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'unicorn'
-gem 'mustache'
-gem 'rspec'
+gem 'mustache', '~> 1.0.2'
 
 group :development do
-  gem 'shotgun'
-  gem 'pry'
-  gem 'guard'
-  gem 'guard-rspec'
+  gem 'rspec'
 end

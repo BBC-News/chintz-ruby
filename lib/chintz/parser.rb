@@ -1,11 +1,15 @@
 require 'yaml'
-require 'dynamic_mustache.rb'
+require 'chintz/mustache'
 
 module Chintz
   class Parser
 
-    def initialize
+    def initialize(base_path, renderer = nil)
+      @base_path = base_path
       @deps = {}
+
+      @renderer ||= Chintz::Mustache
+      @renderer.template_path = base_path
     end
 
     def prepare element_names
@@ -21,7 +25,7 @@ module Chintz
     end
 
     def load_yaml name
-      yaml_path = Dir.glob("chintz/**/#{name}.yaml").first
+      yaml_path = Dir.glob("#{@base_path}/**/#{name}.yaml").first
       YAML.load_file yaml_path
     end
 
@@ -51,7 +55,7 @@ module Chintz
       unless data
         data = fixture()
       end
-      DynamicMustache.render_file(element, data);
+      @renderer.render_file(element, data);
     end
 
     def fixture
