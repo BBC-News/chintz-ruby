@@ -56,9 +56,6 @@ module Chintz
     end
 
     def render(element, data = nil)
-      unless data
-        data = fixture()
-      end
       @renderer.render_file(element, data)
     end
 
