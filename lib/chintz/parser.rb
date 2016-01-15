@@ -1,5 +1,6 @@
 require 'yaml'
 require 'chintz/mustache'
+require 'chintz/path'
 
 module Chintz
   class Parser
@@ -25,7 +26,7 @@ module Chintz
     end
 
     def load_yaml(name)
-      yaml_path = Dir.glob("#{@base_path}/**/#{name}.yaml").first
+      yaml_path = Path.resolve(@base_path, name, 'yaml')
 
       raise NameError, "Manifest file for #{name} not found in #{@base_path}" if yaml_path.nil?
 

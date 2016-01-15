@@ -1,9 +1,10 @@
 require 'mustache'
+require 'chintz/path'
 
 module Chintz
   class Mustache < ::Mustache
     def partial(name)
-      path = Dir.glob("#{template_path}/*/#{name}/#{name}.#{template_extension}").first
+      path = Path.resolve(template_path, name, template_extension)
 
       begin
         File.read(path)
