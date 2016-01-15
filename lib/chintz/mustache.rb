@@ -2,9 +2,15 @@ require 'mustache'
 
 module Chintz
   class Mustache < ::Mustache
-    def self.partial(name)
-      puts "#{template_path}/#{name}.#{template_extension}"
-      IO.read(Dir.glob("#{template_path}/**/#{name}/#{name}.mustache").first)
+    def partial(name)
+      path = Dir.glob("#{template_path}/*/#{name}/#{name}.#{template_extension}").first
+
+      begin
+        File.read(path)
+      rescue
+        raise if raise_on_context_miss?
+        ""
+      end
     end
   end
 end
